@@ -5,9 +5,9 @@ const createOrder = async (req, res) => {
     try {
         const { user, product, quantity } = req.body
         const newOrder = await Order.create({ user, product, quantity })
-        res.status(201).json({ message: "Order created successfully", newOrder })
+        res.status(201).json({ message: "Creation de commande", newOrder })
     } catch (err) {
-        res.status(500).json({ message: "Error creating order", error: err })
+        res.status(500).json({ message: "Erreur de Creation de commande", error: err })
     }
 }
 
@@ -17,9 +17,9 @@ const getAllOrders = async (req, res) => {
         const orders = await Order.find()
             .populate("user")
             .populate("product")
-        res.status(200).json({ message: "All orders", orders })
+        res.status(200).json({ message: "Tous les commandes", orders })
     } catch (err) {
-        res.status(500).json({ message: "Error fetching orders", error: err })
+        res.status(500).json({ message: "Erreur de recuperation de commande", error: err })
     }
 }
 
@@ -29,10 +29,10 @@ const getOrderById = async (req, res) => {
         const order = await Order.findById(req.params.id)
             .populate("user")
             .populate("product")
-        if (!order) return res.status(404).json({ message: "Order not found" })
+        if (!order) return res.status(404).json({ message: "Commande non trouvée" })
         res.status(200).json({ order })
     } catch (err) {
-        res.status(500).json({ message: "Error fetching order", error: err })
+        res.status(500).json({ message: "Erreur de recuperation de commande", error: err })
     }
 }
 
@@ -40,9 +40,9 @@ const getOrderById = async (req, res) => {
 const updateOrder = async (req, res) => {
     try {
         const updatedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.status(200).json({ message: "Order updated", updatedOrder })
+        res.status(200).json({ message: "Commande mise a jour", updatedOrder })
     } catch (err) {
-        res.status(500).json({ message: "Error updating order", error: err })
+        res.status(500).json({ message: "Erreure de mise a jour de commande", error: err })
     }
 }
 
@@ -50,9 +50,9 @@ const updateOrder = async (req, res) => {
 const deleteOrder = async (req, res) => {
     try {
         await Order.findByIdAndDelete(req.params.id)
-        res.status(200).json({ message: "Order deleted" })
+        res.status(200).json({ message: "Commande  supprimé" })
     } catch (err) {
-        res.status(500).json({ message: "Error deleting order", error: err })
+        res.status(500).json({ message: "Erreure de suppresion de commande", error: err })
     }
 }
 
