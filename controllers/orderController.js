@@ -1,17 +1,18 @@
 const Order = require("../models/orderModel")
 
-// Créer une commande
+// Creer une commande
 const createOrder = async (req, res) => {
     try {
         const { user, product, quantity } = req.body
         const newOrder = await Order.create({ user, product, quantity })
+        //const order = await
         res.status(201).json({ message: "Creation de commande", newOrder })
     } catch (err) {
         res.status(500).json({ message: "Erreur de Creation de commande", error: err })
     }
 }
 
-// Récupérer toutes les commandes
+// Recuperer toutes les commandes
 const getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find()
@@ -23,7 +24,7 @@ const getAllOrders = async (req, res) => {
     }
 }
 
-// Récupérer une commande par ID
+// Recuperer une commande par ID
 const getOrderById = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id)
